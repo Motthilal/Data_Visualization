@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Amazon Product Reviews Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="#" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+
+
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  <link href="https://fonts.googleapis.com/css?family=Crete+Round" rel="stylesheet">
+  <script
+  src="https://code.jquery.com/jquery-3.4.0.min.js"
+  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+  crossorigin="anonymous"></script>
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+ -->
+
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;}
+    }
+
+
+
+
+
+  </style>
+
+
+
+
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Dashboard</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- <div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2>Logo</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Dashboard</a></li>
+      </ul><br>
+    </div> -->
+    <br>
+<div id ="parentBanner">
+<div id="main_banner">
+  <h1>Amazon Product Reviews Dashboard</h1>
+  <h3>For Customers and Sellers</h3>
+      <button  style="color: black"onClick="gen_random_asin();" class="btn btn-unique btn-rounded btn-sm my-0">Generate ASIN randomly</button>
+
+  <form class="example" style="margin:auto;max-width:400px">
+  <input id="asin_search" class="form-control mr-sm-2" type="text" placeholder="Amazon ASIN of product" aria-label="Search">
+
+   <button onclick="check(document.getElementById('asin_search').value)" id="main_search" class="search_icon btn btn-unique btn-rounded btn-sm my-0" type="button"><i class="fa fa-search"></i></button>
+</form>
+
+
+</div>
+
+<div id="imageBanner">
+  <img src="resources/amazon.jpeg" height="350px" width="100%">
+</div>
+
+</div>
+
+
+    <div class="col-sm-12" style="background-color:#eaeded">
+
+<div id="small_banner" class="well text-center" >
+        <h3>Amazon Reviews Dashboard</h3>
+
+        <button  onClick="window.location.reload();" class="btn btn-unique btn-rounded btn-sm my-0">New Product Search</button>
+      </div>
+
+
+
+
+
+
+<div id="content_after_search">
+        <div class="row equal">
+          <div class="col-sm-3">
+            <div class="well" id="tile1">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="well" id="tile2">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="well" id ="tile3">
+            </div>
+          </div>
+          <div class="col-sm-3" >
+            <div class="well" id="tile4">
+            </div>
+          </div>
+        </div>
+      <div class="row equal">
+        <div class="col-sm-8">
+          <div class="well">
+            <canvas id="myLineChart"></canvas>
+            <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" id="barchartmodal">
+    <span class="close">&times;</span>
+    <canvas id="barInside" ></canvas>
+
+  </div>
+
+</div>
+
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="well" id = "imageID">
+
+          </div>
+        </div>
+      </div>
+      <div class="row equal">
+        <div class="col-sm-6">
+          <div class="well">
+            <div id="myChart"></div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="well">
+            <div class="outer">
+
+    <div id="container-speed" class="chart-container"></div>
+    <div id="container-rpm" class="chart-container"></div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- Categories -->
+      <div class="row equal">
+        <div class="col-sm-8">
+          <div class="well">
+            <div id="categories"></div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <div id="container"></div>
+          </div>
+        </div>
+      </div>
+</div>
+
+    </div>
+
+
+
+
+
+  </div>
+</div>
+  <script type="text/javascript" src="temp_script.js"></script>
+
+</body>
+
+</html>
